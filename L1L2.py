@@ -11,6 +11,10 @@ from sklearn.metrics.pairwise import pairwise_distances
 from L1tracklets import createTracklets as Tlets 
 from L2trajectories import trackletsToTrajectories
 from L2trajectories import createTrajectories
+from L2trajectories import trajectoriesToTop
+from L2trajectories import fillTrajectories
+from L2trajectories import trajectoriesVis
+from L2trajectories import trajectoriesVis_det
 
 ###Tracklets
 track_ops = {}
@@ -69,7 +73,15 @@ def main():
         
         startFrame = endFrame - traje_ops['overlap']
         endFrame = startFrame + traje_ops['window_width']
-
+    
+### Convert trajectories 
+    trackerOutputRaw = trajectoriesToTop.trajectoriesToTop(trajectories)
+    ## Interpolate missing detections
+#    trackerOutputFilled = fillTrajectories.fillTrajectories(trackerOutputRaw)
+#    
+    trajectoriesVis_det.trajectoriesVis_det(trackerOutputRaw)
+    trajectoriesVis.trajectoriesVis(trajectories)
+    
 if __name__ == '__main__':
     main()
     

@@ -3,7 +3,7 @@ from external import utils
 
 def smoothTracklets(feature_bb,numTracklets,segmentStart,segmentInterval, minTrackletLength, currentInterval):
     feature_bb = np.array(feature_bb)
-    print('numTracklets',numTracklets)
+    
     smoothedTracklets = []
     for i in range(1,int(numTracklets)+1):
         mask = []

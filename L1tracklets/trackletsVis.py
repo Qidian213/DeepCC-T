@@ -26,7 +26,7 @@ import matplotlib.pyplot as plt
 def trackletsVis(spatialGroupDetectionCenters,labels):
     labels = np.ravel(labels)
     ids = np.unique(labels)
-    image = cv2.imread("L1tracklets/vis.jpg")
+    image = cv2.imread("data/vis.jpg")
     point_color_list =[
         [0, 85, 255], [255, 0, 0],  [255, 170, 0], [255, 255, 0.],[0, 255, 170],
         [255, 0, 85], [170, 255, 0], [85, 255, 0], [170, 0, 255.], [0, 0, 255],[0, 255, 85], 

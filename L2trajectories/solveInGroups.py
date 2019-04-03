@@ -13,6 +13,7 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
     result = {}
     result['labels']       = []
     result['observations'] = []
+    
     if(len(tracklets)<=0):
         return result
     
