@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import random
 
 def trajectoriesVis(Trajectories):
-    image = cv2.imread("L2trajectories/vis.jpg")
+    image = cv2.imread("data/vis.jpg")
     for ind in range(len(Trajectories)):
         trajectory = Trajectories[ind]
         tracklets = trajectory['tracklets']

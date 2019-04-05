@@ -6,7 +6,7 @@ import numpy as np
 
 ## detections [frame, traj_id,x,y,w,h]
 def fillTrajectories(detections):
-    detectionsUpdated = detections
+    detectionsUpdated = []
     
     detections = np.array(detections)
     detections = detections[detections[:,5].argsort(),]

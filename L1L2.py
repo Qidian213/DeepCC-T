@@ -13,6 +13,7 @@ from L2trajectories import trackletsToTrajectories
 from L2trajectories import createTrajectories
 from L2trajectories import trajectoriesToTop
 from L2trajectories import fillTrajectories
+from L2trajectories import removeShortTracks
 from L2trajectories import trajectoriesVis
 from L2trajectories import trajectoriesVis_det
 
@@ -37,6 +38,7 @@ traje_ops['overlap'] = 150
 traje_ops['speed_limit'] = 30
 traje_ops['indifference_time'] = 100
 traje_ops['threshold'] = 8
+traje_ops['minimum_trajectory_length'] = 150
 
 def main():
     eng = matlab.engine.start_matlab()
@@ -76,12 +78,21 @@ def main():
     
 ### Convert trajectories 
     trackerOutputRaw = trajectoriesToTop.trajectoriesToTop(trajectories)
+    
     ## Interpolate missing detections
 #    trackerOutputFilled = fillTrajectories.fillTrajectories(trackerOutputRaw)
-#    
-    trajectoriesVis_det.trajectoriesVis_det(trackerOutputRaw)
+
+    ## Remove spurius tracks and Make identities 1-indexed
+    trackerOutputRemoved = removeShortTracks.removeShortTracks(trackerOutputRaw,traje_ops['minimum_trajectory_length'])
+
+    trajectoriesVis_det.trajectoriesVis_det(trackerOutputRemoved)
     trajectoriesVis.trajectoriesVis(trajectories)
     
+### Save trajectories
+    print('Saving trajectories results ')
+    trackerOutputRemoved = np.array(trackerOutputRemoved)
+    np.savetxt('trajectories.txt', trackerOutputRemoved, delimiter=' ', fmt='%.2f')
+
 if __name__ == '__main__':
     main()
     
