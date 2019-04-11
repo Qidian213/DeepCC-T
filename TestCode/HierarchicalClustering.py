@@ -92,17 +92,15 @@ class Hierarchical(object):
         if node.right:
             self.leaf_traversal(node.right, label)
 
+iris = datasets.load_iris()
 
+my = Hierarchical(4)
+my.fit(iris.data)
+print(np.array(my.labels))
 
-#iris = datasets.load_iris()
-
-#my = Hierarchical(4)
-#my.fit(iris.data)
-#print(np.array(my.labels))
-
-#sk = cluster.AgglomerativeClustering(4)
-#sk.fit(iris.data)
-#print(sk.labels_)
+sk = cluster.AgglomerativeClustering(4)
+sk.fit(iris.data)
+print(sk.labels_)
 
 print("tets--line ")
 

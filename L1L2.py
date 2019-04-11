@@ -75,7 +75,7 @@ def main():
         
         startFrame = endFrame - traje_ops['overlap']
         endFrame = startFrame + traje_ops['window_width']
-    
+
 ### Convert trajectories 
     trackerOutputRaw = trajectoriesToTop.trajectoriesToTop(trajectories)
     
@@ -86,8 +86,8 @@ def main():
     trackerOutputRemoved = removeShortTracks.removeShortTracks(trackerOutputRaw,traje_ops['minimum_trajectory_length'])
 
     trajectoriesVis_det.trajectoriesVis_det(trackerOutputRemoved)
-    trajectoriesVis.trajectoriesVis(trajectories)
-    
+#    trajectoriesVis.trajectoriesVis(trajectories)
+
 ### Save trajectories
     print('Saving trajectories results ')
     trackerOutputRemoved = np.array(trackerOutputRemoved)
@@ -95,4 +95,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
+

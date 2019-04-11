@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt  
+import random
 
 #def trackletsVis(spatialGroupDetectionCenters,labels):
 #    labels = np.ravel(labels)
@@ -26,23 +27,19 @@ import matplotlib.pyplot as plt
 def trackletsVis(spatialGroupDetectionCenters,labels):
     labels = np.ravel(labels)
     ids = np.unique(labels)
-    image = cv2.imread("data/vis.jpg")
-    point_color_list =[
-        [0, 85, 255], [255, 0, 0],  [255, 170, 0], [255, 255, 0.],[0, 255, 170],
-        [255, 0, 85], [170, 255, 0], [85, 255, 0], [170, 0, 255.], [0, 0, 255],[0, 255, 85], 
-        [0, 0, 255], [255, 0, 255], [170, 0, 255], [255, 0, 170],
-        [0, 255, 0],  [0, 255, 255], [0, 170, 255],[255, 85, 0],
-    ] 
+    image = cv2.imread("L1tracklets/vis.jpg")
+
     for idr in ids:
+        color = [random.randint(0,255) for cl in range(3)]
         mask = np.where(labels == idr) 
         centeres_id = spatialGroupDetectionCenters[mask]
         if(len(centeres_id))<20 :
             continue
-        point_list = []
-        
+
         for val in centeres_id:
-            cv2.circle(image, (int(val[0]),int(val[1])), 1, point_color_list[int(idr)], 4)
+            cv2.circle(image, (int(val[0]),int(val[1])), 1, color, 4)
+            
     cv2.imwrite('L1tracklets/vis.jpg',image)
     cv2.imshow('Tracklet',image)
-    cv2.waitKey(100)
+    cv2.waitKey(50)
 

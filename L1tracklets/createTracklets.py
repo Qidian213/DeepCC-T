@@ -11,8 +11,9 @@ from L1tracklets import estimateVelocities
 from L1tracklets import getSpatialGroupIDs
 from L1tracklets import getAppearanceSubMatrix
 from L1tracklets import motionAffinity
-from L1tracklets import trackletsVis
 from L1tracklets import smoothTracklets
+from L1tracklets import trackletsVis
+from L1tracklets import trackletsVis2
 
 def create_tracklets(track_ops,feature_bb,frame_start,frame_end,engine):  
     tracklet = []
@@ -43,9 +44,9 @@ def create_tracklets(track_ops,feature_bb,frame_start,frame_end,engine):
 #### SOLVE A GRAPH PARTITIONING PROBLEM FOR EACH SPATIAL GROUP
     print("Creating tracklets: solving space-time groups")
     for spatialGroupID in range(1,max(spatialGroupIDs)+1):
-        print(spatialGroupID)
+        print('spatialGroupID: ',spatialGroupID)
         elements = np.where(spatialGroupIDs == spatialGroupID) 
-      #  spatialGroupObservations = searchRangeFrames[elements]
+        # spatialGroupObservations = searchRangeFrames[elements]
         # Create an appearance affinity matrix and a motion affinity matrix
         appearanceCorrelation = getAppearanceSubMatrix.getAppearanceSubMatrix(elements,features,track_ops['threshold'])
         spatialGroupDetectionCenters = detectionCenters[elements]
@@ -74,12 +75,14 @@ def create_tracklets(track_ops,feature_bb,frame_start,frame_end,engine):
                 feature_bb[v][0] = identities[k][0]
         else:
             feature_bb[int(elements[0][0])][0] = identities
-        trackletsVis.trackletsVis(spatialGroupDetectionCenters,labels)
-        
+            
+#        trackletsVis.trackletsVis(spatialGroupDetectionCenters,labels)
+    trackletsVis2.trackletsVis2(feature_bb)
+    
     ### FINALIZE TRACKLETS
     ### Fit a low degree polynomial to include missing detections and smooth the tracklet
     smoothedTracklets = smoothTracklets.smoothTracklets(feature_bb,totalLabels,frame_start,track_ops['window_width'], track_ops['min_length'], currentInterval)
-   
+    
     for i in range(len(smoothedTracklets)):
         smoothedTracklets[i]['id'] = i+1
         smoothedTracklets[i]['ids'] = i+1

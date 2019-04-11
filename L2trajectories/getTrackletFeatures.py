@@ -30,6 +30,7 @@ def getTrackletFeatures(tracklets):
         duration.append(centersWorld[ind][-1][2]-centersWorld[ind][0][2])
         direction = [endpoint[ind][0]-startpoint[ind][0],endpoint[ind][1]-startpoint[ind][1]]
         velocity.append([direction[0]/duration[ind],direction[1]/duration[ind]])
+        
 #    print(centersWorld[0])
 #    print(startpoint[0])
 #    print(endpoint[0])

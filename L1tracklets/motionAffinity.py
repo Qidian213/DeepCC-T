@@ -8,6 +8,7 @@ import numpy as np
 from sklearn.metrics.pairwise import pairwise_distances
 
 def motionAffinity(spatialGroupDetectionCenters,spatialGroupDetectionFrames,spatialGroupEstimatedVelocity,speed_limit,beta):
+
     numDetections  = len(spatialGroupDetectionCenters)
     impossibilityMatrix = np.zeros((len(spatialGroupDetectionFrames),len(spatialGroupDetectionFrames)))
     spatialGroupDetectionFrames = np.transpose([spatialGroupDetectionFrames])

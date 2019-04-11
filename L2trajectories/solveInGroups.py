@@ -23,6 +23,7 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
         
     appearanceGroups = np.ones(len(featureVectors),int)
     featureVectors = np.array(featureVectors)
+    
     ### adaptive number of appearance groups
     if(traje_ops['appearance_groups']==0):
        ##### Increase number of groups until no group is too large to solve 
@@ -45,7 +46,7 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
     for val in labels:
         labels2d.append([val])
     labels2d = np.array(labels2d)
- 
+
     result_appearance = []
     for ind in allGroups:
         print('merging tracklets in appearance group:',ind)
@@ -60,6 +61,7 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
         tracklets_affinity = []
         for inaff in indices[0]:
             tracklets_affinity.append(tracklets[inaff])
+            
         spacetimeAffinity, impossibilityMatrix, indifferenceMatrix = getSpaceTimeAffinity.getSpaceTimeAffinity(tracklets_affinity,traje_ops['beta'],traje_ops['speed_limit'],traje_ops['indifference_time'])
 
         ## compute the correlation matrix
@@ -89,7 +91,7 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
 #    result['observations'] = []
     for i in range(len(allGroups)):
         result = mergeResults.mergeResults(result,result_appearance[i])
-
+    
     relabels = result['labels']
     reobservations = result['observations']
     relabels = np.array(relabels)
@@ -102,6 +104,6 @@ def solveInGroups(traje_ops, tracklets, labels,engine):
     reresult = {}
     reresult['labels'] = relabels
     reresult['observations'] = reobservations
-    
+
     return reresult
 

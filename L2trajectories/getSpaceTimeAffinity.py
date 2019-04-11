@@ -36,7 +36,7 @@ def getSpaceTimeAffinity(tracklets, beta1, speedLimit, indifferenceLimit):
 #    intervals = []   ### [[frame_0,frame_n],[frame_0,frame_n]....]
 #    duration = []   ### [frame_n-frame_0,frame_n-frame_0,....]
 #    velocity = []   ### [[vx,vy],[vx,vy],....]
-#    
+
     centersWorld, centersView, startpoint, endpoint, intervals, duration, velocity = getTrackletFeatures.getTrackletFeatures(tracklets)
     
     centerFrame = [[round((interval[0]+interval[1])/2)] for interval in intervals]
